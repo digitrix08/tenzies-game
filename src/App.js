@@ -8,6 +8,7 @@ export default function App() {
     const [dice, setDice] = React.useState(allNewDice());
     const [tenzies, setTenzies] = React.useState(false);
     const [rolls, setRolls] = React.useState(0);
+    const [highScore, setHighScore] = React.useState(0);
 
     React.useEffect(() => {
         const allHeld = dice.every((die) => die.isHeld);
@@ -17,6 +18,20 @@ export default function App() {
             setTenzies(true);
         }
     }, [dice]);
+
+    React.useEffect(() => {
+        let currentHighScore = 0 | parseInt(localStorage.getItem("highScore"));
+        setHighScore(currentHighScore);
+    }, []);
+
+    React.useEffect(() => {
+        // eslint-disable-next-line
+        if (highScore === 0 || (rolls !== 0 && rolls < highScore)) {
+            localStorage.setItem("highScore", rolls);
+            setHighScore(rolls);
+        }
+        // eslint-disable-next-line
+    }, [tenzies]);
 
     function generateNewDie() {
         return {
@@ -59,7 +74,7 @@ export default function App() {
 
     const diceElements = dice.map((die) => (
         <Die
-            key={die.id}
+            key={"soups"}
             value={die.value}
             isHeld={die.isHeld}
             holdDice={() => holdDice(die.id)}
@@ -70,14 +85,13 @@ export default function App() {
         <main>
             {tenzies && <Confetti />}
             <h1 className="title">Tenzies</h1>
-            <p className="instructions">
+            <p className="text">
                 Roll until all dice are the same. Click each die to freeze it at
                 its current value between rolls.
             </p>
-            <div>
-                {rolls !== 0 && (
-                    <p className="instructions">Number of Rolls: {rolls}</p>
-                )}
+            <div className="score-container">
+                <p className="text">Number of Rolls: {rolls}</p>
+                <p className="text">Top Score: {highScore}</p>
             </div>
             <div className="dice-container">{diceElements}</div>
             <button className="roll-dice" onClick={rollDice}>
