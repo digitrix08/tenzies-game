@@ -8,7 +8,9 @@ export default function App() {
     const [dice, setDice] = React.useState(allNewDice());
     const [tenzies, setTenzies] = React.useState(false);
     const [rolls, setRolls] = React.useState(0);
-    const [highScore, setHighScore] = React.useState(0);
+    const [highScore, setHighScore] = React.useState(function () {
+        return 0 || parseInt(localStorage.getItem("highScore"));
+    });
 
     React.useEffect(() => {
         const allHeld = dice.every((die) => die.isHeld);
@@ -18,11 +20,6 @@ export default function App() {
             setTenzies(true);
         }
     }, [dice]);
-
-    React.useEffect(() => {
-        let currentHighScore = 0 | parseInt(localStorage.getItem("highScore"));
-        setHighScore(currentHighScore);
-    }, []);
 
     React.useEffect(() => {
         // eslint-disable-next-line
@@ -74,7 +71,7 @@ export default function App() {
 
     const diceElements = dice.map((die) => (
         <Die
-            key={"soups"}
+            key={die.id}
             value={die.value}
             isHeld={die.isHeld}
             holdDice={() => holdDice(die.id)}
