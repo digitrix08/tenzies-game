@@ -1,6 +1,6 @@
 import React from "react";
 import Die from "./components/Die";
-import { nanoid } from "nanoid";
+import { allNewDice, generateNewDie } from "./utils";
 import Confetti from "./components/Confetti";
 import "./styles/App.css";
 
@@ -29,22 +29,6 @@ export default function App() {
         }
         // eslint-disable-next-line
     }, [tenzies]);
-
-    function generateNewDie() {
-        return {
-            value: Math.ceil(Math.random() * 6),
-            isHeld: false,
-            id: nanoid(),
-        };
-    }
-
-    function allNewDice() {
-        const newDice = [];
-        for (let i = 0; i < 10; i++) {
-            newDice.push(generateNewDie());
-        }
-        return newDice;
-    }
 
     function rollDice() {
         setRolls((prevRoll) => prevRoll + 1);
