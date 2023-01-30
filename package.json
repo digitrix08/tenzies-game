@@ -4,11 +4,22 @@
     "version": "0.1.0",
     "private": true,
     "main": "public/electron.js",
+    "description": "Tenzies game",
+    "author": {
+        "name": "Arup Patel",
+        "email": "mastersoft6@gmail.com"
+    },
+    "build": {
+        "appId": "app.tenzies.game",
+        "win": {
+            "target": "portable",
+            "icon": "src/assets/images/red-die.png"
+        }
+    },
     "dependencies": {
         "@testing-library/jest-dom": "^5.15.1",
         "@testing-library/react": "^11.2.7",
         "@testing-library/user-event": "^12.8.3",
-        "electron": "^22.0.0",
         "react": "^17.0.2",
         "react-confetti": "^6.0.1",
         "react-dom": "^17.0.2",
@@ -26,7 +37,8 @@
         "electron-dev": "concurrently -k \"yarn start\" \"yarn electron\"",
         "electron": "wait-on tcp:3000 && electron .",
         "electron-checks": "electronegativity -i .",
-        "electron-prod": "electron ."
+        "electron-prod": "react-scripts build && electron .",
+        "create-package": "electron-builder"
     },
     "eslintConfig": {
         "extends": [
@@ -49,6 +61,7 @@
     "devDependencies": {
         "@doyensec/electronegativity": "^1.10.2",
         "concurrently": "^7.6.0",
+        "electron": "^22.1.0",
         "electron-builder": "^23.6.0",
         "electron-reload": "^2.0.0-alpha.1",
         "gh-pages": "^3.2.3",
