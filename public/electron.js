@@ -11,10 +11,7 @@ function createWindow() {
         width: 800,
         height: 600,
         autoHideMenuBar: true,
-        icon: path.join(
-            __dirname,
-            "../src/assets/images/icons8-rolling-dice-48.png"
-        ),
+        icon: path.join(__dirname, "../src/assets/images/red-die.png"),
         contextIsolation: true,
         webPreferences: {
             disableBlinkFeatures: "Auxclick",
