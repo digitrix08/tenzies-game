@@ -1,3 +1,10 @@
 # Tenzies game using React.js
 
-Demo: https://digitrix08.github.io/tenzies-game/
+Webapp: https://digitrix08.github.io/tenzies-game/
+
+### Development Setup:
+- Create a .env file at the root directory.
+- Set Environment variables:
+
+        BROWSER=none
+        ENVIRONMENT="development"
